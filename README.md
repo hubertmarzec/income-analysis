@@ -4,9 +4,11 @@ Return array of summary data, with pattern
 
 
 ## GIT
+```bash
 git init .
 git add -A
 git commit -m'Commnet'
 
 git push
 git pull  
+```javascript
