@@ -5,7 +5,10 @@ Return array of summary data, with pattern
 
 ## GIT
 ```bash
-git init .
+git config --global user.name "FIRST_NAME LAST_NAME"
+git config --global user.email "MY_NAME@example.com"
+
+git clone git@github.com:hubertmarzec/income-analysis.git
 git add -A
 git commit -m'Commnet'
 
