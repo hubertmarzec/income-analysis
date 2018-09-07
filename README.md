@@ -11,4 +11,4 @@ git commit -m'Commnet'
 
 git push
 git pull  
-```javascript
+```
