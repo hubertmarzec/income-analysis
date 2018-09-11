@@ -17,11 +17,6 @@ def parse_csv(csv_path):
       data.append({'account' : row[7], 'amount' : float(row[4]), 'name': row[8]})
   return data
 
-# return list of dicts with keys: account, name, amount_sum
-def calculate_sum(data):
-  result = []
-  return result;
-
 def group_by_account(data):
   grouped = {}
   for row in data:
