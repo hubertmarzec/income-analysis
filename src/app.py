@@ -5,31 +5,60 @@
 #print output
 def path_to_data(csv_path):
   import csv
-  with open (csv_path) as csvfile:
-   data= csv.reader(csvfile, delimiter=",")
-   
-  result=[]  
-  return result
-
-def pick_wanted_cols(data, index_for_account, index_for_name, index_for_amount):
-
-  data[index_for_account]='account_no'
-  data[index_for_name]='name'
-  data[index_for_amount]='amount'
-
-  data=data[:,['account_no','name','amount']].index_col=0
-  data=data.values
-
+  with open (csv_path, 'r' ) as csvfile:
+    reader = csv.reader(csvfile, delimiter = ',')
+    data=[]
+    for row in reader:
+      data.append(row)
   return data
 
-def group_by_account_no(data):
-  
-  data.group_by(data['account_no'])
+  # with open (csv_path , 'rb') as csvfile:
+  #   reader = csv.reader(csvfile, delimiter = ',')
+  #   # for row in reader:
+  #   #     row = csvfile.readline()
+  #   #     data=data.append(row)
+  #   data=[]
 
-  return grouped_data
+  #   for row in reader:
+  #     data = data.append(row)
+
+
+
+def pick_wanted_cols(data, index_for_account, index_for_name, index_for_amount):
+  data_a=[]
+  data_n=[]
+  data_am=[]
+
+  
+  for entry in list(data):
+    
+    data_a.append(entry[7])
+    data_n.append(entry[8])
+    data_am.append(entry[4])
+  n_data=[data_a,data_n,data_am]
+  
+  return n_data
+
+
+
+
+
+
+# def group_by_account_no(data):
+  
+#   data.group_by(data['account_no'])
+
+#   return grouped_data
+# for entry in list(data):
+#   group=entry[0]
+
+#   for group, items in itertools.groupby(list(data)):
+#     print (group, list(items))
+
 
 
 def sum_amount(data):
+
 
   data = data.sum(data['amount'])
 
