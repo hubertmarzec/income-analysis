@@ -22,6 +22,34 @@ def path_to_data(csv_path):
   #   for row in reader:
   #     data = data.append(row)
 
+def path_to_dictionary(csv_path):
+
+  import csv
+
+  with open(csv_path, mode='r') as csv_file:
+    reader = csv.reader(csv_file)
+    
+    data_dict = {rows[7]:[rows[8], rows[4]] for rows in reader}
+
+
+  return data_dict
+
+def data_summary(data):
+
+  key_to_remove='Rachunek nadawcy/odbiorcy'
+  del data[key_to_remove]
+  #Removes description key for keys in data
+
+  for key, val in data.items():
+    key.format("'","")
+    (val[1]).format("'","")
+    summary=(
+      key.count(key),
+      val[0],
+      float(val[1]).agr(sum)
+      )
+  return summary
+
 
 
 def pick_wanted_cols(data, index_for_account, index_for_name, index_for_amount):
