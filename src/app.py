@@ -1,17 +1,23 @@
-#
-#read csv
-#group by account No
-#agr by sum
-#print output
-def path_to_data(csv_path):
-  import csv
-  with open (csv_path, 'r' ) as csvfile:
-    reader = csv.reader(csvfile, delimiter = ',')
-    data=[]
-    for row in reader:
-      data.append(row)
+
+# main function
+def payment_summary(csv_path):
+  prepared_data = parse_csv(csv_path)
+  grouped = group_by_account(prepared_data)
+  data = list(grouped.values())
   return data
 
+# return list of dicts with keys: account, amount, name
+def parse_csv(csv_path):
+  import csv
+  data=[]
+  with open (csv_path, 'r' ) as csvfile:
+    reader = csv.reader(csvfile, delimiter = ',')
+    next(reader) # skip first line (header)
+    for row in reader:
+      data.append({'account' : row[7], 'amount' : float(row[4]), 'name': row[8]})
+  return data
+
+# <<<<<<< HEAD
   # with open (csv_path , 'rb') as csvfile:
   #   reader = csv.reader(csvfile, delimiter = ',')
   #   # for row in reader:
@@ -25,30 +31,25 @@ def path_to_data(csv_path):
 def path_to_dictionary(csv_path):
 
   import csv
-
+  data_dict=[]
   with open(csv_path, mode='r') as csv_file:
     reader = csv.reader(csv_file)
-    
-    data_dict = {rows[7]:[rows[8], rows[4]] for rows in reader}
-
+   
+    data_entry = ({'account_No':row[7],'account_Holder':row[8],'amount':float(row[4])} for row in reader )
+    data_dict = data_dict.append(data_entry)
 
   return data_dict
 
 def data_summary(data):
-
-  key_to_remove='Rachunek nadawcy/odbiorcy'
-  del data[key_to_remove]
-  #Removes description key for keys in data
-
-  for key, val in data.items():
-    key.format("'","")
-    (val[1]).format("'","")
-    summary=(
-      key.count(key),
-      val[0],
-      float(val[1]).agr(sum)
-      )
-  return summary
+  grouped_by_account={}
+  for row in data:
+    if row['account_No'] not in grouped_by_account:
+      grouped_by_account[row['account_No']]={'account_No':row['account_No'],
+      'account_Holder':row['account_Holder'],'Total_amount':row['amount']}
+    else:
+      grouped_by_account[row['account_No']]['Total_amount']=grouped_by_account[row['account_No']]['Total_amount']+row['amount']
+  
+  return grouped_by_account
 
 
 
@@ -85,9 +86,18 @@ def pick_wanted_cols(data, index_for_account, index_for_name, index_for_amount):
 
 
 
-def sum_amount(data):
+# def sum_amount(data):
 
 
-  data = data.sum(data['amount'])
+#   data = data.sum(data['amount'])
+# =======
+# def group_by_account(data):
+#   grouped = {}
+#   for row in data:
+#     if row['account'] in grouped:
+#       grouped[row['account']]['amount_sum'] = grouped[row['account']]['amount_sum'] + row['amount']
+#     else:
+#       grouped[row['account']] = {'account' : row['account'], 'name' : row['name'], 'amount_sum' : row['amount']}
+#   return grouped;
+# >>>>>>> 08d6dccdac85ee090c18ae820e483f3d7b81a615
 
-  return summed_amount_data
