@@ -34,9 +34,10 @@ def path_to_dictionary(csv_path):
   data_dict=[]
   with open(csv_path, mode='r') as csv_file:
     reader = csv.reader(csv_file)
-   
-    data_entry = ({'account_No':row[7],'account_Holder':row[8],'amount':float(row[4])} for row in reader )
-    data_dict = data_dict.append(data_entry)
+    next(reader)
+    for row in reader:
+      data_entry = {'account_No':row[7],'account_Holder':row[8],'amount':float(row[4])}  
+      data_dict.append(data_entry)
 
   return data_dict
 

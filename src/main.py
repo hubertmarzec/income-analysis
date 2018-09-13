@@ -5,11 +5,11 @@ from app import data_summary
 
 data= path_to_dictionary('../data/Historia_Rachunku_180206_211715.csv')
 
-print(data)
+#print(data)
 
-# data_s = data_summary(data)
+data_s = data_summary(data)
 
-# print(data_s)
+print(data_s)
 
 
 # =======
